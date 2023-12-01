@@ -1,0 +1,49 @@
+components:
+  schemas:
+    Device:
+      description: >-
+        Device.
+      type: object
+      required: [name]
+      properties:
+        name:
+          x-include: ../common/common.yaml#/components/schemas/Named.Object/properties/name
+          x-field-uid: 1
+        vendor:
+          description: >-
+            Vendor(manufacturer of the device)
+          type: string
+          x-field-uid: 2
+        model:
+          description: >-
+            Model(unique identification of the device type)
+          type: string
+          x-field-uid: 3
+        platform:
+          description: >-
+            Platform (describes a combination of operating system, applications, or other types of software that is supported by the device) 
+          type: string
+          x-field-uid: 4
+        image:
+          description: >-
+            Image (a unique software package installed on the device)  
+          type: string
+          x-field-uid: 5
+        interfaces:
+          description: |-
+            List of Logical Interfaces
+          type: array
+          items:
+            $ref: '../interface/interface.yaml#/components/schemas/Interface'
+          x-field-uid: 6
+        attributes:
+          description: |-
+            attributes of the devices 
+          type: array
+          items:
+            $ref: '../interface/attribute.yaml#/components/schemas/Attribute'
+          x-field-uid: 7
+
+
+
+

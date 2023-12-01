@@ -1,0 +1,22 @@
+components:
+  schemas:
+    Testbed:
+      description: |-
+        A container for Testbed model.
+      type: object
+      properties:
+        devices:
+          description: |-
+            Logical Device with list of logical interfaces 
+          type: array
+          items:
+            $ref: '../device/device.yaml#/components/schemas/Device'
+          x-field-uid: 1
+        links:
+          description: |-
+            Interconnection of logical interfaces between logical interfaces.
+          type: array
+          items:
+            $ref: '../link/link.yaml#/components/schemas/Link'
+          x-field-uid: 2
+          

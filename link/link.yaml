@@ -1,0 +1,21 @@
+components:
+  schemas:
+    Link:
+      description: >-
+        Device.
+      type: object
+      properties:
+        src:
+          description: |- 
+            The unique name of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/Interface/properties/name'
+          x-field-uid: 1
+        dst:
+          description: |- 
+            The unique name of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/Interface/properties/name'
+          x-field-uid: 2

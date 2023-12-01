@@ -1,0 +1,20 @@
+paths:
+  /reserve:
+    post:
+      tags: ['Testbed']
+      operationId: reserve
+      description: >-
+        Reserves the testbed based on available devices from inventory.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../testbed/testbed.yaml#/components/schemas/Testbed'
+      responses:
+        '200':
+          $ref: '../result/request.yaml#/components/responses/Success'
+          x-field-uid: 1
+        default:
+          $ref: '../result/request.yaml#/components/responses/Failure'
+          x-field-uid: 2
