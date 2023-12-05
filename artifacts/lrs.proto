@@ -102,7 +102,7 @@ message Attribute {
 
   // Globally unique name of an object. It also serves as the primary key for arrays of
   // objects.
-  optional string name = 1;
+  optional string key = 1;
 
   // Description missing in models
   optional string value = 2;

@@ -216,7 +216,7 @@ components:
         attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #
       type: object
       properties:
-        name:
+        key:
           x-field-uid: 1
           description: |-
             Globally unique name of an object. It also serves as the primary key for arrays of objects.
