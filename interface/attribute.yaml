@@ -5,7 +5,7 @@ components:
         attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #
       type: object
       properties:
-        name:
+        key:
           x-include: ../common/common.yaml#/components/schemas/Named.Object/properties/name
           x-field-uid: 1
         value:
