@@ -62,14 +62,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Commit openapi.yaml and otg.proto
+      - name: Commit openapi.yaml and lrs.proto
         if: github.event_name != 'pull_request'
         id: commit_generated
         run: |
           git config user.name "Github Actions Bot"
           git config user.email "actions@github.com"
           git add --force artifacts/openapi.yaml
-          git add --force artifacts/otg.proto
+          git add --force artifacts/lrs.proto
           git add --force artifacts/openapi.html
           if git status --porcelain | grep .
             then
@@ -85,6 +85,6 @@ jobs:
         with:
           name: "Release ${{ steps.get_version.outputs.version }}"
           body: "View openapi.yaml spec at https://redocly.github.io/redoc/?url=https://github.com/open-traffic-generator/testbed/releases/download/${{ steps.get_version.outputs.version }}/openapi.yaml"
-          artifacts: artifacts/openapi.yaml,artifacts/openapi.json,artifacts/otg.proto,artifacts/openapi.html
+          artifacts: artifacts/openapi.yaml,artifacts/openapi.json,artifacts/lrs.proto,artifacts/openapi.html
           tag: ${{ steps.get_version.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
