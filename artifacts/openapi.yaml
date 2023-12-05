@@ -1,0 +1,327 @@
+openapi: 3.0.3
+info:
+  title: Open Traffic Generator API
+  description: |-
+    Testbed Model
+  version: 0.0.1
+  contact:
+    url: https://github.com/open-traffic-generator/testbed
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: /
+paths:
+  /reserve:
+    post:
+      tags:
+      - Testbed
+      operationId: reserve
+      description: |-
+        Reserves the testbed based on available devices from inventory.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Testbed'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+          x-field-uid: 1
+        default:
+          $ref: '#/components/responses/Failure'
+          x-field-uid: 2
+  /capabilities/version:
+    get:
+      tags:
+      - Capabilities
+      operationId: get_version
+      responses:
+        '200':
+          description: |-
+            Version details from API server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+          x-field-uid: 1
+        default:
+          $ref: '#/components/responses/Failure'
+          x-field-uid: 2
+components:
+  responses:
+    Success:
+      description: "The request has succeeded with no application content but the\
+        \ server \nmay return a list of detailed warnings."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Warning'
+    Failure:
+      description: |-
+        The request did not succeed and server has responded with error details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Testbed:
+      description: |-
+        A container for Testbed model.
+      type: object
+      properties:
+        devices:
+          description: "Logical Device with list of logical interfaces "
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+          x-field-uid: 1
+        links:
+          description: |-
+            Interconnection of logical interfaces between logical interfaces.
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          x-field-uid: 2
+    Device:
+      description: |-
+        Device.
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          x-field-uid: 1
+          description: |-
+            Globally unique name of an object. It also serves as the primary key for arrays of objects.
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-unique: global
+        vendor:
+          description: |-
+            Vendor(manufacturer of the device)
+          type: string
+          x-field-uid: 2
+        model:
+          description: |-
+            Model(unique identification of the device type)
+          type: string
+          x-field-uid: 3
+        platform:
+          description: "Platform (describes a combination of operating system, applications,\
+            \ or other types of software that is supported by the device) "
+          type: string
+          x-field-uid: 4
+        image:
+          description: "Image (a unique software package installed on the device)\
+            \  "
+          type: string
+          x-field-uid: 5
+        interfaces:
+          description: |-
+            List of Logical Interfaces
+          type: array
+          items:
+            $ref: '#/components/schemas/Interface'
+          x-field-uid: 6
+        attributes:
+          description: "attributes of the devices "
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          x-field-uid: 7
+    Interface:
+      description: |-
+        Local Interface for Testbed Reservation Service.
+      type: object
+      properties:
+        name:
+          x-field-uid: 1
+          description: |-
+            Globally unique name of an object. It also serves as the primary key for arrays of objects.
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-unique: global
+        media:
+          description: |-
+            Set the type of media interface if supported.
+          type: string
+          x-field-uid: 2
+          x-enum:
+            copper:
+              x-field-uid: 1
+            fiber:
+              x-field-uid: 2
+            sgmii:
+              x-field-uid: 3
+          enum:
+          - copper
+          - fiber
+          - sgmii
+        speed:
+          type: string
+          default: speed_10_gbps
+          x-field-uid: 3
+          x-enum:
+            speed_10_fd_mbps:
+              x-field-uid: 1
+            speed_10_hd_mbps:
+              x-field-uid: 2
+            speed_100_fd_mbps:
+              x-field-uid: 3
+            speed_100_hd_mbps:
+              x-field-uid: 4
+            speed_1_gbps:
+              x-field-uid: 5
+            speed_10_gbps:
+              x-field-uid: 6
+            speed_25_gbps:
+              x-field-uid: 7
+            speed_40_gbps:
+              x-field-uid: 8
+            speed_50_gbps:
+              x-field-uid: 9
+            speed_100_gbps:
+              x-field-uid: 10
+            speed_200_gbps:
+              x-field-uid: 11
+            speed_400_gbps:
+              x-field-uid: 12
+          enum:
+          - speed_10_fd_mbps
+          - speed_10_hd_mbps
+          - speed_100_fd_mbps
+          - speed_100_hd_mbps
+          - speed_1_gbps
+          - speed_10_gbps
+          - speed_25_gbps
+          - speed_40_gbps
+          - speed_50_gbps
+          - speed_100_gbps
+          - speed_200_gbps
+          - speed_400_gbps
+        transceiver:
+          type: string
+          x-field-uid: 4
+        attributes:
+          description: |-
+            attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #,
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          x-field-uid: 5
+    Attribute:
+      description: |-
+        attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #
+      type: object
+      properties:
+        name:
+          x-field-uid: 1
+          description: |-
+            Globally unique name of an object. It also serves as the primary key for arrays of objects.
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-unique: global
+        value:
+          type: string
+          x-field-uid: 2
+    Link:
+      description: |-
+        Device.
+      type: object
+      properties:
+        src:
+          description: |
+            The unique name of a logical port of a device
+
+            x-constraint:
+            - /components/schemas/Interface/properties/name
+          type: string
+          x-constraint:
+          - /components/schemas/Interface/properties/name
+          x-field-uid: 1
+        dst:
+          description: |
+            The unique name of a logical port of a device
+
+            x-constraint:
+            - /components/schemas/Interface/properties/name
+          type: string
+          x-constraint:
+          - /components/schemas/Interface/properties/name
+          x-field-uid: 2
+    Error:
+      description: |-
+        Error response generated while serving API request.
+      type: object
+      required:
+      - code
+      - errors
+      properties:
+        code:
+          description: |-
+            Numeric status code based on the underlying transport being used.
+            The API server MUST set this code explicitly based on following references:
+              - HTTP 4xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.5
+              - HTTP 5xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.6
+              - gRPC errors: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+          type: integer
+          format: int32
+          x-field-uid: 1
+        kind:
+          description: |-
+            Classification of error originating from within API server that may not be mapped to the value in `code`.
+            Absence of this field may indicate that the error did not originate from within API server.
+          type: string
+          x-enum:
+            validation:
+              x-field-uid: 1
+            internal:
+              x-field-uid: 2
+          x-field-uid: 2
+          enum:
+          - validation
+          - internal
+        errors:
+          description: |-
+            List of error messages generated while executing the request.
+          type: array
+          items:
+            type: string
+          x-field-uid: 3
+    Warning:
+      description: |-
+        A list of warnings that have occurred while executing the request.
+      type: object
+      properties:
+        warnings:
+          description: "A list of any system specific warnings that have occurred\
+            \ while \nexecuting the request."
+          type: array
+          items:
+            type: string
+          x-field-uid: 1
+    Version:
+      description: |-
+        Version details
+      type: object
+      properties:
+        api_spec_version:
+          description: |-
+            Version of API specification
+          type: string
+          default: ''
+          x-field-uid: 1
+        sdk_version:
+          description: |-
+            Version of SDK generated from API specification
+          type: string
+          default: ''
+          x-field-uid: 2
+        app_version:
+          description: |-
+            Version of application consuming or serving the API
+          type: string
+          default: ''
+          x-field-uid: 3

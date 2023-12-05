@@ -1,0 +1,216 @@
+/* Open Traffic Generator API 0.0.1
+ * Testbed Model
+ * License: MIT */
+
+syntax = "proto3";
+
+package lrs;
+
+option go_package = "./lrs;lrs";
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/empty.proto";
+
+// A container for Testbed model.
+message Testbed {
+
+  // Logical Device with list of logical interfaces
+  repeated Device devices = 1;
+
+  // Interconnection of logical interfaces between logical interfaces.
+  repeated Link links = 2;
+}
+
+// Device.
+message Device {
+
+  // Globally unique name of an object. It also serves as the primary key for arrays of
+  // objects.
+  // required = true
+  optional string name = 1;
+
+  // Vendor(manufacturer of the device)
+  optional string vendor = 2;
+
+  // Model(unique identification of the device type)
+  optional string model = 3;
+
+  // Platform (describes a combination of operating system, applications, or other types
+  // of software that is supported by the device)
+  optional string platform = 4;
+
+  // Image (a unique software package installed on the device)
+  optional string image = 5;
+
+  // List of Logical Interfaces
+  repeated Interface interfaces = 6;
+
+  // attributes of the devices
+  repeated Attribute attributes = 7;
+}
+
+// Local Interface for Testbed Reservation Service.
+message Interface {
+
+  // Globally unique name of an object. It also serves as the primary key for arrays of
+  // objects.
+  optional string name = 1;
+
+  message Media {
+    enum Enum {
+      unspecified = 0;
+      copper = 1;
+      fiber = 2;
+      sgmii = 3;
+    }
+  }
+  // Set the type of media interface if supported.
+  optional Media.Enum media = 2;
+
+  message Speed {
+    enum Enum {
+      unspecified = 0;
+      speed_10_fd_mbps = 1;
+      speed_10_hd_mbps = 2;
+      speed_100_fd_mbps = 3;
+      speed_100_hd_mbps = 4;
+      speed_1_gbps = 5;
+      speed_10_gbps = 6;
+      speed_25_gbps = 7;
+      speed_40_gbps = 8;
+      speed_50_gbps = 9;
+      speed_100_gbps = 10;
+      speed_200_gbps = 11;
+      speed_400_gbps = 12;
+    }
+  }
+  // Description missing in models
+  // default = Speed.Enum.speed_10_gbps
+  optional Speed.Enum speed = 3;
+
+  // Description missing in models
+  optional string transceiver = 4;
+
+  // attributes of the device interfaces that specify an internal architecture behind
+  // the interface, for example: NPU #, NPU Core, Slice #,
+  repeated Attribute attributes = 5;
+}
+
+// attributes of the device interfaces that specify an internal architecture behind
+// the interface, for example: NPU #, NPU Core, Slice #
+message Attribute {
+
+  // Globally unique name of an object. It also serves as the primary key for arrays of
+  // objects.
+  optional string name = 1;
+
+  // Description missing in models
+  optional string value = 2;
+}
+
+// Device.
+message Link {
+
+  // The unique name of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/Interface/properties/name
+  // 
+  optional string src = 1;
+
+  // The unique name of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/Interface/properties/name
+  // 
+  optional string dst = 2;
+}
+
+// Error response generated while serving API request.
+message Error {
+
+  // Numeric status code based on the underlying transport being used.
+  // The API server MUST set this code explicitly based on following references:
+  // - HTTP 4xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.5
+  // - HTTP 5xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.6
+  // - gRPC errors: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+  // required = true
+  optional int32 code = 1;
+
+  message Kind {
+    enum Enum {
+      unspecified = 0;
+      validation = 1;
+      internal = 2;
+    }
+  }
+  // Classification of error originating from within API server that may not be mapped
+  // to the value in `code`.
+  // Absence of this field may indicate that the error did not originate from within API
+  // server.
+  optional Kind.Enum kind = 2;
+
+  // List of error messages generated while executing the request.
+  repeated string errors = 3;
+}
+
+// A list of warnings that have occurred while executing the request.
+message Warning {
+
+  // A list of any system specific warnings that have occurred while
+  // executing the request.
+  repeated string warnings = 1;
+}
+
+// Version details
+message Version {
+
+  // Version of API specification
+  // default =
+  optional string api_spec_version = 1;
+
+  // Version of SDK generated from API specification
+  // default =
+  optional string sdk_version = 2;
+
+  // Version of application consuming or serving the API
+  // default =
+  optional string app_version = 3;
+}
+
+// The request has succeeded with no application content but the server
+// may return a list of detailed warnings.
+message Success {
+  Warning warning = 1;
+}
+
+// The request did not succeed and server has responded with error details.
+message Failure {
+  Error error = 1;
+}
+
+message ReserveRequest {
+  Testbed testbed = 1;
+}
+message ReserveResponse {
+  Warning warning = 1;
+}
+
+message GetVersionResponse {
+  Version version = 1;
+}
+
+
+// Description missing in models
+//
+// For all RPCs defined in this service, API Server SHOULD provide JSON
+// representation of `Error` message as an error string upon failure, ensuring
+// name of enum constants (instead of value) for `kind` property is present
+// in the representation
+service Openapi {
+
+  // Reserves the testbed based on available devices from inventory.
+  rpc Reserve(ReserveRequest) returns (ReserveResponse);
+  // Description missing in models
+  rpc GetVersion(google.protobuf.Empty) returns (GetVersionResponse);
+}
