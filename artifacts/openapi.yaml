@@ -89,12 +89,12 @@ components:
         Device.
       type: object
       required:
-      - name
+      - id
       properties:
-        name:
+        id:
           x-field-uid: 1
           description: |-
-            Globally unique name of an object. It also serves as the primary key for arrays of objects.
+            Globally unique id of an object. It also serves as the primary key for arrays of objects.
           type: string
           pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
           x-unique: global
@@ -136,13 +136,12 @@ components:
         Local Interface for Testbed Reservation Service.
       type: object
       properties:
-        name:
-          x-field-uid: 1
+        id:
           description: |-
-            Globally unique name of an object. It also serves as the primary key for arrays of objects.
+            Logical identifier for the port
           type: string
           pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
-          x-unique: global
+          x-field-uid: 1
         media:
           description: |-
             Set the type of media interface if supported.
@@ -232,24 +231,60 @@ components:
       type: object
       properties:
         src:
-          description: |
-            The unique name of a logical port of a device
-
-            x-constraint:
-            - /components/schemas/Interface/properties/name
-          type: string
-          x-constraint:
-          - /components/schemas/Interface/properties/name
+          $ref: '#/components/schemas/Link.Src'
           x-field-uid: 1
         dst:
+          $ref: '#/components/schemas/Link.Dst'
+          x-field-uid: 2
+    Link.Src:
+      description: |-
+        Src for the link.
+      type: object
+      properties:
+        device:
           description: |
-            The unique name of a logical port of a device
+            The unique id of a logical device
 
             x-constraint:
-            - /components/schemas/Interface/properties/name
+            - /components/schemas/Device/properties/id
           type: string
           x-constraint:
-          - /components/schemas/Interface/properties/name
+          - /components/schemas/Device/properties/id
+          x-field-uid: 1
+        interface:
+          description: |
+            The unique id of a logical port of a device
+
+            x-constraint:
+            - /components/schemas/Interface/properties/id
+          type: string
+          x-constraint:
+          - /components/schemas/Interface/properties/id
+          x-field-uid: 2
+    Link.Dst:
+      description: |-
+        Dst for the link.
+      type: object
+      properties:
+        device:
+          description: |
+            The unique id of a logical device
+
+            x-constraint:
+            - /components/schemas/Device/properties/id
+          type: string
+          x-constraint:
+          - /components/schemas/Device/properties/id
+          x-field-uid: 1
+        interface:
+          description: |
+            The unique id of a logical port of a device
+
+            x-constraint:
+            - /components/schemas/Interface/properties/id
+          type: string
+          x-constraint:
+          - /components/schemas/Interface/properties/id
           x-field-uid: 2
     Error:
       description: |-

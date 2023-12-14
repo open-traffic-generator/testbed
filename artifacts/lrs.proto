@@ -24,10 +24,10 @@ message Testbed {
 // Device.
 message Device {
 
-  // Globally unique name of an object. It also serves as the primary key for arrays of
+  // Globally unique id of an object. It also serves as the primary key for arrays of
   // objects.
   // required = true
-  optional string name = 1;
+  optional string id = 1;
 
   // Vendor(manufacturer of the device)
   optional string vendor = 2;
@@ -52,9 +52,8 @@ message Device {
 // Local Interface for Testbed Reservation Service.
 message Interface {
 
-  // Globally unique name of an object. It also serves as the primary key for arrays of
-  // objects.
-  optional string name = 1;
+  // Logical identifier for the port
+  optional string id = 1;
 
   message Media {
     enum Enum {
@@ -111,19 +110,47 @@ message Attribute {
 // Device.
 message Link {
 
-  // The unique name of a logical port of a device
-  // 
-  // x-constraint:
-  // - /components/schemas/Interface/properties/name
-  // 
-  optional string src = 1;
+  // Description missing in models
+  LinkSrc src = 1;
 
-  // The unique name of a logical port of a device
+  // Description missing in models
+  LinkDst dst = 2;
+}
+
+// Src for the link.
+message LinkSrc {
+
+  // The unique id of a logical device
   // 
   // x-constraint:
-  // - /components/schemas/Interface/properties/name
+  // - /components/schemas/Device/properties/id
   // 
-  optional string dst = 2;
+  optional string device = 1;
+
+  // The unique id of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/Interface/properties/id
+  // 
+  optional string interface = 2;
+}
+
+// Dst for the link.
+message LinkDst {
+
+  // The unique id of a logical device
+  // 
+  // x-constraint:
+  // - /components/schemas/Device/properties/id
+  // 
+  optional string device = 1;
+
+  // The unique id of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/Interface/properties/id
+  // 
+  optional string interface = 2;
 }
 
 // Error response generated while serving API request.
