@@ -53,6 +53,7 @@ message Device {
 message Interface {
 
   // Logical identifier for the port
+  // required = true
   optional string id = 1;
 
   message Media {
@@ -125,13 +126,15 @@ message LinkSrc {
   // x-constraint:
   // - /components/schemas/Device/properties/id
   // 
+  // required = true
   optional string device = 1;
 
-  // The unique id of a logical port of a device
+  // The id of a logical port of a device
   // 
   // x-constraint:
   // - /components/schemas/Interface/properties/id
   // 
+  // required = true
   optional string interface = 2;
 }
 
@@ -143,13 +146,15 @@ message LinkDst {
   // x-constraint:
   // - /components/schemas/Device/properties/id
   // 
+  // required = true
   optional string device = 1;
 
-  // The unique id of a logical port of a device
+  // The id of a logical port of a device
   // 
   // x-constraint:
   // - /components/schemas/Interface/properties/id
   // 
+  // required = true
   optional string interface = 2;
 }
 
