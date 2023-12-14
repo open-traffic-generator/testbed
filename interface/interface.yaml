@@ -4,6 +4,7 @@ components:
       description: >-
         Local Interface for Testbed Reservation Service.
       type: object
+      required: [id]
       properties:
         id:
           description: |-
