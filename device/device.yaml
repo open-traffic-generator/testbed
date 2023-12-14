@@ -4,10 +4,10 @@ components:
       description: >-
         Device.
       type: object
-      required: [name]
+      required: [id]
       properties:
-        name:
-          x-include: ../common/common.yaml#/components/schemas/Named.Object/properties/name
+        id:
+          x-include: ../common/common.yaml#/components/schemas/Id.Object/properties/id
           x-field-uid: 1
         vendor:
           description: >-

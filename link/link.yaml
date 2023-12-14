@@ -6,16 +6,46 @@ components:
       type: object
       properties:
         src:
-          description: |- 
-            The unique name of a logical port of a device
-          type: string
-          x-constraint:
-          - '/components/schemas/Interface/properties/name'
+          $ref: '#/components/schemas/Link.Src'
           x-field-uid: 1
         dst:
+          $ref: '#/components/schemas/Link.Dst'
+          x-field-uid: 2
+    Link.Src:
+      description: >-
+        Src for the link.
+      type: object
+      properties:
+        device:
           description: |- 
-            The unique name of a logical port of a device
+            The unique id of a logical device
           type: string
           x-constraint:
-          - '/components/schemas/Interface/properties/name'
+          - '/components/schemas/Device/properties/id'
+          x-field-uid: 1
+        interface:
+          description: |- 
+            The unique id of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/Interface/properties/id'
+          x-field-uid: 2
+    Link.Dst:
+      description: >-
+        Dst for the link.
+      type: object
+      properties:
+        device:
+          description: |- 
+            The unique id of a logical device
+          type: string
+          x-constraint:
+          - '/components/schemas/Device/properties/id'
+          x-field-uid: 1
+        interface:
+          description: |- 
+            The unique id of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/Interface/properties/id'
           x-field-uid: 2

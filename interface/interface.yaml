@@ -5,8 +5,11 @@ components:
         Local Interface for Testbed Reservation Service.
       type: object
       properties:
-        name:
-          x-include: ../common/common.yaml#/components/schemas/Named.Object/properties/name
+        id:
+          description: |-
+            Logical identifier for the port
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
           x-field-uid: 1
         media:
           description: |-

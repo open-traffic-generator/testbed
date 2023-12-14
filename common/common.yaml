@@ -19,6 +19,18 @@ components:
           pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
           x-field-uid: 1
           x-unique: global
+    Id.Object:
+      type: object
+      required: [id]
+      properties:
+        id:
+          description: >-
+            Globally unique id of an object.
+            It also serves as the primary key for arrays of objects.
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-field-uid: 2
+          x-unique: global
     ChoiceNone:
       description: >-
         A empty container that is used to indicate a null choice.
