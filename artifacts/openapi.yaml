@@ -72,14 +72,14 @@ components:
       type: object
       properties:
         devices:
-          description: "Logical Device with list of logical interfaces "
+          description: "Logical Device with list of logical ports "
           type: array
           items:
             $ref: '#/components/schemas/Device'
           x-field-uid: 1
         links:
           description: |-
-            Interconnection of logical interfaces between logical interfaces.
+            Interconnection of logical ports between logical devices.
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -118,12 +118,12 @@ components:
             \  "
           type: string
           x-field-uid: 5
-        interfaces:
+        ports:
           description: |-
-            List of Logical Interfaces
+            List of Logical ports
           type: array
           items:
-            $ref: '#/components/schemas/Interface'
+            $ref: '#/components/schemas/Port'
           x-field-uid: 6
         attributes:
           description: "attributes of the devices "
@@ -131,9 +131,9 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
           x-field-uid: 7
-    Interface:
+    Port:
       description: |-
-        Local Interface for Testbed Reservation Service.
+        Local Port for Testbed Reservation Service.
       type: object
       required:
       - id
@@ -146,7 +146,7 @@ components:
           x-field-uid: 1
         media:
           description: |-
-            Set the type of media interface if supported.
+            Set the type of media port if supported.
           type: string
           x-field-uid: 2
           x-enum:
@@ -207,14 +207,14 @@ components:
           x-field-uid: 4
         attributes:
           description: |-
-            attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #,
+            attributes of the device ports that specify an internal architecture behind the port, for example: NPU #, NPU Core, Slice #,
           type: array
           items:
             $ref: '#/components/schemas/Attribute'
           x-field-uid: 5
     Attribute:
       description: |-
-        attributes of the device interfaces that specify an internal architecture behind the interface, for example: NPU #, NPU Core, Slice #
+        attributes of the device ports that specify an internal architecture behind the port, for example: NPU #, NPU Core, Slice #
       type: object
       properties:
         key:
@@ -244,7 +244,7 @@ components:
       type: object
       required:
       - device
-      - interface
+      - port
       properties:
         device:
           description: |
@@ -256,15 +256,15 @@ components:
           x-constraint:
           - /components/schemas/Device/properties/id
           x-field-uid: 1
-        interface:
+        port:
           description: |
             The id of a logical port of a device
 
             x-constraint:
-            - /components/schemas/Interface/properties/id
+            - /components/schemas/Port/properties/id
           type: string
           x-constraint:
-          - /components/schemas/Interface/properties/id
+          - /components/schemas/Port/properties/id
           x-field-uid: 2
     Link.Dst:
       description: |-
@@ -272,7 +272,7 @@ components:
       type: object
       required:
       - device
-      - interface
+      - port
       properties:
         device:
           description: |
@@ -284,15 +284,15 @@ components:
           x-constraint:
           - /components/schemas/Device/properties/id
           x-field-uid: 1
-        interface:
+        port:
           description: |
             The id of a logical port of a device
 
             x-constraint:
-            - /components/schemas/Interface/properties/id
+            - /components/schemas/port/properties/id
           type: string
           x-constraint:
-          - /components/schemas/Interface/properties/id
+          - /components/schemas/port/properties/id
           x-field-uid: 2
     Error:
       description: |-

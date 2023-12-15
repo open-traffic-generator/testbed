@@ -14,10 +14,10 @@ import "google/protobuf/empty.proto";
 // A container for Testbed model.
 message Testbed {
 
-  // Logical Device with list of logical interfaces
+  // Logical Device with list of logical ports
   repeated Device devices = 1;
 
-  // Interconnection of logical interfaces between logical interfaces.
+  // Interconnection of logical ports between logical devices.
   repeated Link links = 2;
 }
 
@@ -42,15 +42,15 @@ message Device {
   // Image (a unique software package installed on the device)
   optional string image = 5;
 
-  // List of Logical Interfaces
-  repeated Interface interfaces = 6;
+  // List of Logical ports
+  repeated Port ports = 6;
 
   // attributes of the devices
   repeated Attribute attributes = 7;
 }
 
-// Local Interface for Testbed Reservation Service.
-message Interface {
+// Local Port for Testbed Reservation Service.
+message Port {
 
   // Logical identifier for the port
   // required = true
@@ -64,7 +64,7 @@ message Interface {
       sgmii = 3;
     }
   }
-  // Set the type of media interface if supported.
+  // Set the type of media port if supported.
   optional Media.Enum media = 2;
 
   message Speed {
@@ -91,13 +91,13 @@ message Interface {
   // Description missing in models
   optional string transceiver = 4;
 
-  // attributes of the device interfaces that specify an internal architecture behind
-  // the interface, for example: NPU #, NPU Core, Slice #,
+  // attributes of the device ports that specify an internal architecture behind the port,
+  // for example: NPU #, NPU Core, Slice #,
   repeated Attribute attributes = 5;
 }
 
-// attributes of the device interfaces that specify an internal architecture behind
-// the interface, for example: NPU #, NPU Core, Slice #
+// attributes of the device ports that specify an internal architecture behind the port,
+// for example: NPU #, NPU Core, Slice #
 message Attribute {
 
   // Globally unique name of an object. It also serves as the primary key for arrays of
@@ -132,10 +132,10 @@ message LinkSrc {
   // The id of a logical port of a device
   // 
   // x-constraint:
-  // - /components/schemas/Interface/properties/id
+  // - /components/schemas/Port/properties/id
   // 
   // required = true
-  optional string interface = 2;
+  optional string port = 2;
 }
 
 // Dst for the link.
@@ -152,10 +152,10 @@ message LinkDst {
   // The id of a logical port of a device
   // 
   // x-constraint:
-  // - /components/schemas/Interface/properties/id
+  // - /components/schemas/port/properties/id
   // 
   // required = true
-  optional string interface = 2;
+  optional string port = 2;
 }
 
 // Error response generated while serving API request.
