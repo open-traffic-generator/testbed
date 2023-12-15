@@ -29,19 +29,19 @@ components:
             Image (a unique software package installed on the device)  
           type: string
           x-field-uid: 5
-        interfaces:
+        ports:
           description: |-
-            List of Logical Interfaces
+            List of Logical ports
           type: array
           items:
-            $ref: '../interface/interface.yaml#/components/schemas/Interface'
+            $ref: '../port/port.yaml#/components/schemas/Port'
           x-field-uid: 6
         attributes:
           description: |-
             attributes of the devices 
           type: array
           items:
-            $ref: '../interface/attribute.yaml#/components/schemas/Attribute'
+            $ref: '../port/attribute.yaml#/components/schemas/Attribute'
           x-field-uid: 7
 
 

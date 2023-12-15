@@ -15,7 +15,7 @@ components:
       description: >-
         Src for the link.
       type: object
-      required: [device, interface]
+      required: [device, port]
       properties:
         device:
           description: |- 
@@ -24,18 +24,18 @@ components:
           x-constraint:
           - '/components/schemas/Device/properties/id'
           x-field-uid: 1
-        interface:
+        port:
           description: |- 
             The id of a logical port of a device
           type: string
           x-constraint:
-          - '/components/schemas/Interface/properties/id'
+          - '/components/schemas/Port/properties/id'
           x-field-uid: 2
     Link.Dst:
       description: >-
         Dst for the link.
       type: object
-      required: [device, interface]
+      required: [device, port]
       properties:
         device:
           description: |- 
@@ -44,10 +44,10 @@ components:
           x-constraint:
           - '/components/schemas/Device/properties/id'
           x-field-uid: 1
-        interface:
+        port:
           description: |- 
             The id of a logical port of a device
           type: string
           x-constraint:
-          - '/components/schemas/Interface/properties/id'
+          - '/components/schemas/port/properties/id'
           x-field-uid: 2

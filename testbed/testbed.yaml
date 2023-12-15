@@ -7,14 +7,14 @@ components:
       properties:
         devices:
           description: |-
-            Logical Device with list of logical interfaces 
+            Logical Device with list of logical ports 
           type: array
           items:
             $ref: '../device/device.yaml#/components/schemas/Device'
           x-field-uid: 1
         links:
           description: |-
-            Interconnection of logical interfaces between logical interfaces.
+            Interconnection of logical ports between logical devices.
           type: array
           items:
             $ref: '../link/link.yaml#/components/schemas/Link'
