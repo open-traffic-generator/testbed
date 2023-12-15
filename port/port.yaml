@@ -1,0 +1,65 @@
+components:
+  schemas:
+    Port:
+      description: >-
+        Local Port for Testbed Reservation Service.
+      type: object
+      required: [id]
+      properties:
+        id:
+          description: |-
+            Logical identifier for the port
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-field-uid: 1
+        media:
+          description: |-
+            Set the type of media port if supported.
+          type: string
+          x-field-uid: 2
+          x-enum:
+            copper:
+              x-field-uid: 1
+            fiber:
+              x-field-uid: 2
+            sgmii:
+              x-field-uid: 3
+        speed:
+          type: string
+          default: speed_10_gbps
+          x-field-uid: 3
+          x-enum:
+            speed_10_fd_mbps:
+              x-field-uid: 1
+            speed_10_hd_mbps:
+              x-field-uid: 2
+            speed_100_fd_mbps:
+              x-field-uid: 3
+            speed_100_hd_mbps:
+              x-field-uid: 4
+            speed_1_gbps:
+              x-field-uid: 5
+            speed_10_gbps:
+              x-field-uid: 6
+            speed_25_gbps:
+              x-field-uid: 7
+            speed_40_gbps:
+              x-field-uid: 8
+            speed_50_gbps:
+              x-field-uid: 9
+            speed_100_gbps:
+              x-field-uid: 10
+            speed_200_gbps:
+              x-field-uid: 11
+            speed_400_gbps:
+              x-field-uid: 12
+        transceiver:
+          type: string
+          x-field-uid: 4
+        attributes:
+          description: |-
+            attributes of the device ports that specify an internal architecture behind the port, for example: NPU #, NPU Core, Slice #,
+          type: array
+          items:
+            $ref: '../port/attribute.yaml#/components/schemas/Attribute'
+          x-field-uid: 5
