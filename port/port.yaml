@@ -12,11 +12,17 @@ components:
           type: string
           pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
           x-field-uid: 1
+        name:
+          description: >-
+            Name of the port on a device that you want to match from the inventory.
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-field-uid: 2
         media:
           description: |-
             Set the type of media port if supported.
           type: string
-          x-field-uid: 2
+          x-field-uid: 3
           x-enum:
             copper:
               x-field-uid: 1
@@ -27,7 +33,7 @@ components:
         speed:
           type: string
           default: speed_10_gbps
-          x-field-uid: 3
+          x-field-uid: 4
           x-enum:
             speed_10_fd_mbps:
               x-field-uid: 1
@@ -55,11 +61,11 @@ components:
               x-field-uid: 12
         transceiver:
           type: string
-          x-field-uid: 4
+          x-field-uid: 5
         attributes:
           description: |-
             attributes of the device ports that specify an internal architecture behind the port, for example: NPU #, NPU Core, Slice #,
           type: array
           items:
             $ref: '../port/attribute.yaml#/components/schemas/Attribute'
-          x-field-uid: 5
+          x-field-uid: 6
