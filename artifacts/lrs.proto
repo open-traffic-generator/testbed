@@ -29,24 +29,27 @@ message Device {
   // required = true
   optional string id = 1;
 
+  // Name of the device that you want to match from the inventory
+  optional string name = 2;
+
   // Vendor(manufacturer of the device)
-  optional string vendor = 2;
+  optional string vendor = 3;
 
   // Model(unique identification of the device type)
-  optional string model = 3;
+  optional string model = 4;
 
   // Platform (describes a combination of operating system, applications, or other types
   // of software that is supported by the device)
-  optional string platform = 4;
+  optional string platform = 5;
 
   // Image (a unique software package installed on the device)
-  optional string image = 5;
+  optional string image = 6;
 
   // List of Logical ports
-  repeated Port ports = 6;
+  repeated Port ports = 7;
 
   // attributes of the devices
-  repeated Attribute attributes = 7;
+  repeated Attribute attributes = 8;
 }
 
 // Local Port for Testbed Reservation Service.
@@ -55,6 +58,9 @@ message Port {
   // Logical identifier for the port
   // required = true
   optional string id = 1;
+
+  // Name of the port on a device that you want to match from the inventory.
+  optional string name = 2;
 
   message Media {
     enum Enum {
@@ -65,7 +71,7 @@ message Port {
     }
   }
   // Set the type of media port if supported.
-  optional Media.Enum media = 2;
+  optional Media.Enum media = 3;
 
   message Speed {
     enum Enum {
@@ -86,14 +92,14 @@ message Port {
   }
   // Description missing in models
   // default = Speed.Enum.speed_10_gbps
-  optional Speed.Enum speed = 3;
+  optional Speed.Enum speed = 4;
 
   // Description missing in models
-  optional string transceiver = 4;
+  optional string transceiver = 5;
 
   // attributes of the device ports that specify an internal architecture behind the port,
   // for example: NPU #, NPU Core, Slice #,
-  repeated Attribute attributes = 5;
+  repeated Attribute attributes = 6;
 }
 
 // attributes of the device ports that specify an internal architecture behind the port,
