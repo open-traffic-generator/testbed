@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: Open Traffic Generator API
+  description: |-
+    Testbed Model
+  version: 0.0.1
+  contact:
+    url: https://github.com/open-traffic-generator/testbed
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: /
+paths: {}
