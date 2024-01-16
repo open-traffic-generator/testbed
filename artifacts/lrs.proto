@@ -62,36 +62,60 @@ message Port {
   // Name of the port on a device that you want to match from the inventory.
   optional string name = 2;
 
-  message Media {
+  message Pmd {
     enum Enum {
       unspecified = 0;
-      copper = 1;
-      fiber = 2;
-      sgmii = 3;
+      PMD_UNSPECIFIED = 1;
+      PMD_10GBASE_LRM = 2;
+      PMD_10GBASE_LR = 3;
+      PMD_10GBASE_ZR = 4;
+      PMD_10GBASE_ER = 5;
+      PMD_10GBASE_SR = 6;
+      PMD_40GBASE_CR4 = 7;
+      PMD_40GBASE_SR4 = 8;
+      PMD_40GBASE_LR4 = 9;
+      PMD_40GBASE_ER4 = 10;
+      PMD_40GBASE_PSM4 = 11;
+      PMD_4X10GBASE_LR = 12;
+      PMD_4X10GBASE_SR = 13;
+      PMD_100G_AOC = 14;
+      PMD_100G_ACC = 15;
+      PMD_100GBASE_SR10 = 16;
+      PMD_100GBASE_SR4 = 17;
+      PMD_100GBASE_LR4 = 18;
+      PMD_100GBASE_ER4 = 19;
+      PMD_100GBASE_CWDM4 = 20;
+      PMD_100GBASE_CLR4 = 21;
+      PMD_100GBASE_PSM4 = 22;
+      PMD_100GBASE_CR4 = 23;
+      PMD_100GBASE_FR = 24;
+      PMD_400GBASE_ZR = 25;
+      PMD_400GBASE_LR4 = 26;
+      PMD_400GBASE_FR4 = 27;
+      PMD_400GBASE_LR8 = 28;
+      PMD_400GBASE_DR4 = 29;
+      PMD_100GBASE_DR = 30;
     }
   }
-  // Set the type of media port if supported.
-  optional Media.Enum media = 3;
+  // Physical medium dependent of the port.
+  // This should be kept in sync with the values specified in OpenConfig:
+  // https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-transport-types.yang
+  // default = Pmd.Enum.pmd_unspecified
+  optional Pmd.Enum pmd = 3;
 
   message Speed {
     enum Enum {
       unspecified = 0;
-      speed_10_fd_mbps = 1;
-      speed_10_hd_mbps = 2;
-      speed_100_fd_mbps = 3;
-      speed_100_hd_mbps = 4;
-      speed_1_gbps = 5;
-      speed_10_gbps = 6;
-      speed_25_gbps = 7;
-      speed_40_gbps = 8;
-      speed_50_gbps = 9;
-      speed_100_gbps = 10;
-      speed_200_gbps = 11;
-      speed_400_gbps = 12;
+      SPEED_UNSPECIFIED = 1;
+      s_1GB = 2;
+      s_5GB = 3;
+      s_10GB = 4;
+      s_100GB = 5;
+      s_400GB = 6;
     }
   }
   // Description missing in models
-  // default = Speed.Enum.speed_10_gbps
+  // default = Speed.Enum.speed_unspecified
   optional Speed.Enum speed = 4;
 
   // Description missing in models
