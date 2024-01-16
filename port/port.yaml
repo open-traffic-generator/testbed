@@ -94,15 +94,15 @@ components:
           x-enum:
             SPEED_UNSPECIFIED:
               x-field-uid: 1
-            s_1GB:
+            S_1GB:
               x-field-uid: 2
-            s_5GB:
+            S_5GB:
               x-field-uid: 3
-            s_10GB:
+            S_10GB:
               x-field-uid: 4
-            s_100GB:
+            S_100GB:
               x-field-uid: 5
-            s_400GB:
+            S_400GB:
               x-field-uid: 6
         transceiver:
           type: string
