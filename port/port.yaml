@@ -18,47 +18,92 @@ components:
           type: string
           pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
           x-field-uid: 2
-        media:
+        pmd:
           description: |-
-            Set the type of media port if supported.
+            Physical medium dependent of the port.
+            This should be kept in sync with the values specified in OpenConfig:
+            https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-transport-types.yang
           type: string
           x-field-uid: 3
+          default: PMD_UNSPECIFIED
           x-enum:
-            copper:
+            PMD_UNSPECIFIED:
               x-field-uid: 1
-            fiber:
+            PMD_10GBASE_LRM:
               x-field-uid: 2
-            sgmii:
+            PMD_10GBASE_LR:
               x-field-uid: 3
+            PMD_10GBASE_ZR:
+              x-field-uid: 4
+            PMD_10GBASE_ER:
+              x-field-uid: 5
+            PMD_10GBASE_SR:
+              x-field-uid: 6
+            PMD_40GBASE_CR4:
+              x-field-uid: 7
+            PMD_40GBASE_SR4:
+              x-field-uid: 8
+            PMD_40GBASE_LR4:
+              x-field-uid: 9
+            PMD_40GBASE_ER4:
+              x-field-uid: 10
+            PMD_40GBASE_PSM4:
+              x-field-uid: 11
+            PMD_4X10GBASE_LR:
+              x-field-uid: 12
+            PMD_4X10GBASE_SR:
+              x-field-uid: 13
+            PMD_100G_AOC:
+              x-field-uid: 14
+            PMD_100G_ACC:
+              x-field-uid: 15
+            PMD_100GBASE_SR10:
+              x-field-uid: 16
+            PMD_100GBASE_SR4:
+              x-field-uid: 17
+            PMD_100GBASE_LR4:
+              x-field-uid: 18
+            PMD_100GBASE_ER4:
+              x-field-uid: 19
+            PMD_100GBASE_CWDM4:
+              x-field-uid: 20
+            PMD_100GBASE_CLR4:
+              x-field-uid: 21
+            PMD_100GBASE_PSM4:
+              x-field-uid: 22
+            PMD_100GBASE_CR4:
+              x-field-uid: 23
+            PMD_100GBASE_FR:
+              x-field-uid: 24
+            PMD_400GBASE_ZR:
+              x-field-uid: 25
+            PMD_400GBASE_LR4:
+              x-field-uid: 26
+            PMD_400GBASE_FR4:
+              x-field-uid: 27
+            PMD_400GBASE_LR8:
+              x-field-uid: 28
+            PMD_400GBASE_DR4:
+              x-field-uid: 29
+            PMD_100GBASE_DR:
+              x-field-uid: 30
         speed:
           type: string
-          default: speed_10_gbps
+          default: SPEED_UNSPECIFIED
           x-field-uid: 4
           x-enum:
-            speed_10_fd_mbps:
+            SPEED_UNSPECIFIED:
               x-field-uid: 1
-            speed_10_hd_mbps:
+            s_1GB:
               x-field-uid: 2
-            speed_100_fd_mbps:
+            s_5GB:
               x-field-uid: 3
-            speed_100_hd_mbps:
+            s_10GB:
               x-field-uid: 4
-            speed_1_gbps:
+            s_100GB:
               x-field-uid: 5
-            speed_10_gbps:
+            s_400GB:
               x-field-uid: 6
-            speed_25_gbps:
-              x-field-uid: 7
-            speed_40_gbps:
-              x-field-uid: 8
-            speed_50_gbps:
-              x-field-uid: 9
-            speed_100_gbps:
-              x-field-uid: 10
-            speed_200_gbps:
-              x-field-uid: 11
-            speed_400_gbps:
-              x-field-uid: 12
         transceiver:
           type: string
           x-field-uid: 5
