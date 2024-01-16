@@ -107,11 +107,11 @@ message Port {
     enum Enum {
       unspecified = 0;
       SPEED_UNSPECIFIED = 1;
-      s_1GB = 2;
-      s_5GB = 3;
-      s_10GB = 4;
-      s_100GB = 5;
-      s_400GB = 6;
+      S_1GB = 2;
+      S_5GB = 3;
+      S_10GB = 4;
+      S_100GB = 5;
+      S_400GB = 6;
     }
   }
   // Description missing in models
