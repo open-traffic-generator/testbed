@@ -269,16 +269,28 @@ components:
               x-field-uid: 3
             S_10GB:
               x-field-uid: 4
-            S_100GB:
+            S_25GB:
               x-field-uid: 5
-            S_400GB:
+            S_40GB:
               x-field-uid: 6
+            S_50GB:
+              x-field-uid: 7
+            S_100GB:
+              x-field-uid: 8
+            S_200GB:
+              x-field-uid: 9
+            S_400GB:
+              x-field-uid: 10
           enum:
           - SPEED_UNSPECIFIED
           - S_1GB
           - S_5GB
           - S_10GB
+          - S_25GB
+          - S_40GB
+          - S_50GB
           - S_100GB
+          - S_200GB
           - S_400GB
         transceiver:
           type: string

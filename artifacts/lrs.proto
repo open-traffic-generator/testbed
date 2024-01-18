@@ -110,8 +110,12 @@ message Port {
       S_1GB = 2;
       S_5GB = 3;
       S_10GB = 4;
-      S_100GB = 5;
-      S_400GB = 6;
+      S_25GB = 5;
+      S_40GB = 6;
+      S_50GB = 7;
+      S_100GB = 8;
+      S_200GB = 9;
+      S_400GB = 10;
     }
   }
   // Description missing in models
