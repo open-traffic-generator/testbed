@@ -259,7 +259,7 @@ message ReserveRequest {
   Testbed testbed = 1;
 }
 message ReserveResponse {
-  Warning warning = 1;
+  string string = 1;
 }
 
 message GetVersionResponse {

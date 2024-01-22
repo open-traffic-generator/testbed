@@ -27,7 +27,12 @@ paths:
               $ref: '#/components/schemas/Testbed'
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          description: |-
+            Return response from the lab reservation service.
+          content:
+            application/json:
+              schema:
+                type: string
           x-field-uid: 1
         default:
           $ref: '#/components/responses/Failure'
