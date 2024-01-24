@@ -1,0 +1,13 @@
+components:
+  schemas:
+    Attribute:
+      description: >-
+        attributes of the device ports that specify an internal architecture behind the port, for example: NPU #, NPU Core, Slice #
+      type: object
+      properties:
+        key:
+          x-include: ../common/common.yaml#/components/schemas/Named.Object/properties/name
+          x-field-uid: 1
+        value:
+          type: string
+          x-field-uid: 2

@@ -1,0 +1,53 @@
+components:
+  schemas:
+    Link:
+      description: >-
+        Device.
+      type: object
+      properties:
+        src:
+          $ref: '#/components/schemas/Link.Src'
+          x-field-uid: 1
+        dst:
+          $ref: '#/components/schemas/Link.Dst'
+          x-field-uid: 2
+    Link.Src:
+      description: >-
+        Src for the link.
+      type: object
+      required: [device, port]
+      properties:
+        device:
+          description: |- 
+            The unique id of a logical device
+          type: string
+          x-constraint:
+          - '/components/schemas/Device/properties/id'
+          x-field-uid: 1
+        port:
+          description: |- 
+            The id of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/Port/properties/id'
+          x-field-uid: 2
+    Link.Dst:
+      description: >-
+        Dst for the link.
+      type: object
+      required: [device, port]
+      properties:
+        device:
+          description: |- 
+            The unique id of a logical device
+          type: string
+          x-constraint:
+          - '/components/schemas/Device/properties/id'
+          x-field-uid: 1
+        port:
+          description: |- 
+            The id of a logical port of a device
+          type: string
+          x-constraint:
+          - '/components/schemas/port/properties/id'
+          x-field-uid: 2

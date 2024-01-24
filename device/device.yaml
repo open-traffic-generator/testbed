@@ -1,0 +1,55 @@
+components:
+  schemas:
+    Device:
+      description: >-
+        Device.
+      type: object
+      required: [id]
+      properties:
+        id:
+          x-include: ../common/common.yaml#/components/schemas/Id.Object/properties/id
+          x-field-uid: 1
+        name:
+          description: >-
+            Name of the device that you want to match from the inventory
+          type: string
+          pattern: ^[\sa-zA-Z0-9-_()><\[\]]+$
+          x-field-uid: 2
+        vendor:
+          description: >-
+            Vendor(manufacturer of the device)
+          type: string
+          x-field-uid: 3
+        model:
+          description: >-
+            Model(unique identification of the device type)
+          type: string
+          x-field-uid: 4
+        platform:
+          description: >-
+            Platform (describes a combination of operating system, applications, or other types of software that is supported by the device) 
+          type: string
+          x-field-uid: 5
+        image:
+          description: >-
+            Image (a unique software package installed on the device)  
+          type: string
+          x-field-uid: 6
+        ports:
+          description: |-
+            List of Logical ports
+          type: array
+          items:
+            $ref: '../port/port.yaml#/components/schemas/Port'
+          x-field-uid: 7
+        attributes:
+          description: |-
+            attributes of the devices 
+          type: array
+          items:
+            $ref: '../port/attribute.yaml#/components/schemas/Attribute'
+          x-field-uid: 8
+
+
+
+

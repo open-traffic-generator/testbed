@@ -1,0 +1,25 @@
+paths:
+  /reserve:
+    post:
+      tags: ['Testbed']
+      operationId: reserve
+      description: >-
+        Reserves the testbed based on available devices from inventory.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../testbed/testbed.yaml#/components/schemas/Testbed'
+      responses:
+        '200':
+          description: >-
+            Return response from the lab reservation service.
+          content:
+            application/json:
+              schema:
+                type: string
+          x-field-uid: 1
+        default:
+          $ref: '../result/request.yaml#/components/responses/Failure'
+          x-field-uid: 2
