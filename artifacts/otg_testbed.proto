@@ -50,6 +50,17 @@ message Device {
 
   // attributes of the devices
   repeated Attribute attributes = 8;
+
+  message Role {
+    enum Enum {
+      unspecified = 0;
+      DUT = 1;
+      ATE = 2;
+    }
+  }
+  // Role of a device, either ATE(Automatic test equipment) or DUT(Device under Test)
+  // required = true
+  optional Role.Enum role = 9;
 }
 
 // Local Port for Testbed Reservation Service.
