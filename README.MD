@@ -1,1 +1,1 @@
-Testbed Reservation Model
+OTG Testbed Model
