@@ -23,7 +23,7 @@ import openapiart
 
 openapiart.OpenApiArt(
     api_files=["./api/info.yaml", "./api/api.yaml"],
-    protobuf_name="lrs",
+    protobuf_name="otg_testbed",
     artifact_dir="artifacts",
     generate_version_api=True,
-).GeneratePythonSdk(package_name="lrs")
+).GeneratePythonSdk(package_name="otg_testbed")
