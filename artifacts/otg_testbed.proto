@@ -1,0 +1,282 @@
+/* Open Traffic Generator Testbed Model API 0.0.1
+ * OTG Testbed Model
+ * License: MIT */
+
+syntax = "proto3";
+
+package otg_testbed;
+
+option go_package = "./otg_testbed;otg_testbed";
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/empty.proto";
+
+// A container for Testbed model.
+message Testbed {
+
+  // Logical Device with list of logical ports
+  repeated Device devices = 1;
+
+  // Interconnection of logical ports between logical devices.
+  repeated Link links = 2;
+}
+
+// Device.
+message Device {
+
+  // Globally unique id of an object. It also serves as the primary key for arrays of
+  // objects.
+  // required = true
+  optional string id = 1;
+
+  // Name of the device that you want to match from the inventory
+  optional string name = 2;
+
+  // Vendor(manufacturer of the device)
+  optional string vendor = 3;
+
+  // Model(unique identification of the device type)
+  optional string model = 4;
+
+  // Platform (describes a combination of operating system, applications, or other types
+  // of software that is supported by the device)
+  optional string platform = 5;
+
+  // Image (a unique software package installed on the device)
+  optional string image = 6;
+
+  // List of Logical ports
+  repeated Port ports = 7;
+
+  // attributes of the devices
+  repeated Attribute attributes = 8;
+}
+
+// Local Port for Testbed Reservation Service.
+message Port {
+
+  // Logical identifier for the port
+  // required = true
+  optional string id = 1;
+
+  // Name of the port on a device that you want to match from the inventory.
+  optional string name = 2;
+
+  message Pmd {
+    enum Enum {
+      unspecified = 0;
+      PMD_UNSPECIFIED = 1;
+      PMD_10GBASE_LRM = 2;
+      PMD_10GBASE_LR = 3;
+      PMD_10GBASE_ZR = 4;
+      PMD_10GBASE_ER = 5;
+      PMD_10GBASE_SR = 6;
+      PMD_40GBASE_CR4 = 7;
+      PMD_40GBASE_SR4 = 8;
+      PMD_40GBASE_LR4 = 9;
+      PMD_40GBASE_ER4 = 10;
+      PMD_40GBASE_PSM4 = 11;
+      PMD_4X10GBASE_LR = 12;
+      PMD_4X10GBASE_SR = 13;
+      PMD_100G_AOC = 14;
+      PMD_100G_ACC = 15;
+      PMD_100GBASE_SR10 = 16;
+      PMD_100GBASE_SR4 = 17;
+      PMD_100GBASE_LR4 = 18;
+      PMD_100GBASE_ER4 = 19;
+      PMD_100GBASE_CWDM4 = 20;
+      PMD_100GBASE_CLR4 = 21;
+      PMD_100GBASE_PSM4 = 22;
+      PMD_100GBASE_CR4 = 23;
+      PMD_100GBASE_FR = 24;
+      PMD_400GBASE_ZR = 25;
+      PMD_400GBASE_LR4 = 26;
+      PMD_400GBASE_FR4 = 27;
+      PMD_400GBASE_LR8 = 28;
+      PMD_400GBASE_DR4 = 29;
+      PMD_100GBASE_DR = 30;
+    }
+  }
+  // Physical medium dependent of the port.
+  // This should be kept in sync with the values specified in OpenConfig:
+  // https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-transport-types.yang
+  // default = Pmd.Enum.pmd_unspecified
+  optional Pmd.Enum pmd = 3;
+
+  message Speed {
+    enum Enum {
+      unspecified = 0;
+      SPEED_UNSPECIFIED = 1;
+      S_1GB = 2;
+      S_5GB = 3;
+      S_10GB = 4;
+      S_25GB = 5;
+      S_40GB = 6;
+      S_50GB = 7;
+      S_100GB = 8;
+      S_200GB = 9;
+      S_400GB = 10;
+    }
+  }
+  // Description missing in models
+  // default = Speed.Enum.speed_unspecified
+  optional Speed.Enum speed = 4;
+
+  // Description missing in models
+  optional string transceiver = 5;
+
+  // attributes of the device ports that specify an internal architecture behind the port,
+  // for example: NPU #, NPU Core, Slice #,
+  repeated Attribute attributes = 6;
+}
+
+// attributes of the device ports that specify an internal architecture behind the port,
+// for example: NPU #, NPU Core, Slice #
+message Attribute {
+
+  // Globally unique name of an object. It also serves as the primary key for arrays of
+  // objects.
+  optional string key = 1;
+
+  // Description missing in models
+  optional string value = 2;
+}
+
+// Device.
+message Link {
+
+  // Description missing in models
+  LinkSrc src = 1;
+
+  // Description missing in models
+  LinkDst dst = 2;
+}
+
+// Src for the link.
+message LinkSrc {
+
+  // The unique id of a logical device
+  // 
+  // x-constraint:
+  // - /components/schemas/Device/properties/id
+  // 
+  // required = true
+  optional string device = 1;
+
+  // The id of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/Port/properties/id
+  // 
+  // required = true
+  optional string port = 2;
+}
+
+// Dst for the link.
+message LinkDst {
+
+  // The unique id of a logical device
+  // 
+  // x-constraint:
+  // - /components/schemas/Device/properties/id
+  // 
+  // required = true
+  optional string device = 1;
+
+  // The id of a logical port of a device
+  // 
+  // x-constraint:
+  // - /components/schemas/port/properties/id
+  // 
+  // required = true
+  optional string port = 2;
+}
+
+// Error response generated while serving API request.
+message Error {
+
+  // Numeric status code based on the underlying transport being used.
+  // The API server MUST set this code explicitly based on following references:
+  // - HTTP 4xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.5
+  // - HTTP 5xx errors: https://datatracker.ietf.org/doc/html/rfc9110#section-15.6
+  // - gRPC errors: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
+  // required = true
+  optional int32 code = 1;
+
+  message Kind {
+    enum Enum {
+      unspecified = 0;
+      validation = 1;
+      internal = 2;
+    }
+  }
+  // Classification of error originating from within API server that may not be mapped
+  // to the value in `code`.
+  // Absence of this field may indicate that the error did not originate from within API
+  // server.
+  optional Kind.Enum kind = 2;
+
+  // List of error messages generated while executing the request.
+  repeated string errors = 3;
+}
+
+// A list of warnings that have occurred while executing the request.
+message Warning {
+
+  // A list of any system specific warnings that have occurred while
+  // executing the request.
+  repeated string warnings = 1;
+}
+
+// Version details
+message Version {
+
+  // Version of API specification
+  // default =
+  optional string api_spec_version = 1;
+
+  // Version of SDK generated from API specification
+  // default =
+  optional string sdk_version = 2;
+
+  // Version of application consuming or serving the API
+  // default =
+  optional string app_version = 3;
+}
+
+// The request has succeeded with no application content but the server
+// may return a list of detailed warnings.
+message Success {
+  Warning warning = 1;
+}
+
+// The request did not succeed and server has responded with error details.
+message Failure {
+  Error error = 1;
+}
+
+message ReserveRequest {
+  Testbed testbed = 1;
+}
+message ReserveResponse {
+  string string = 1;
+}
+
+message GetVersionResponse {
+  Version version = 1;
+}
+
+
+// Description missing in models
+//
+// For all RPCs defined in this service, API Server SHOULD provide JSON
+// representation of `Error` message as an error string upon failure, ensuring
+// name of enum constants (instead of value) for `kind` property is present
+// in the representation
+service Openapi {
+
+  // Reserves the testbed based on available devices from inventory.
+  rpc Reserve(ReserveRequest) returns (ReserveResponse);
+  // Description missing in models
+  rpc GetVersion(google.protobuf.Empty) returns (GetVersionResponse);
+}
