@@ -145,9 +145,9 @@ components:
           x-field-uid: 8
         role:
           description: |-
-            Role of a device, either ATE (Automatic test equipment) or DUT (Device under Test).
-            The reservation system implementing the testbed model is expected to fully reserve any
-            equipment marked as a DUT. For ATE, only the ports used for the testbed should be reserved.
+            Role of a device, either ATE(Automatic test equipment) or DUT(Device under Test).
+            The reservation system implementing the testbed model is supposed to
+            fully reserve any equipment marked as DUT.For ATE, only the ports are intended to be reserved.
           type: string
           x-field-uid: 9
           x-enum:
