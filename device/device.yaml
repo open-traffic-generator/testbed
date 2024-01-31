@@ -4,7 +4,7 @@ components:
       description: >-
         Device.
       type: object
-      required: [id]
+      required: [id, role]
       properties:
         id:
           x-include: ../common/common.yaml#/components/schemas/Id.Object/properties/id
@@ -49,6 +49,19 @@ components:
           items:
             $ref: '../port/attribute.yaml#/components/schemas/Attribute'
           x-field-uid: 8
+        role:
+          description: |-
+            Role of a device, either ATE(Automatic test equipment) or DUT(Device under Test).
+            The reservation system implementing the testbed model is supposed to
+            fully reserve any equipment marked as DUT.For ATE, only the ports are intended to be reserved.
+          type: string
+          x-field-uid: 9
+          x-enum:
+            DUT:
+              x-field-uid: 1
+            ATE:
+              x-field-uid: 2
+
 
 
 
