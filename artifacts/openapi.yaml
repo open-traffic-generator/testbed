@@ -144,10 +144,12 @@ components:
             $ref: '#/components/schemas/Attribute'
           x-field-uid: 8
         role:
-          description: |-
-            Role of a device, either ATE(Automatic test equipment) or DUT(Device under Test).
-            The reservation system implementing the testbed model is supposed to
-            fully reserve any equipment marked as DUT.For ATE, only the ports are intended to be reserved.
+          description: "Role of a device, ATE(Automatic test equipment), DUT(Device\
+            \ under Test) or SWITCH.\nThe reservation system implementing the testbed\
+            \ model is supposed to\nfully reserve any equipment marked as DUT.For\
+            \ ATE, only the ports are intended to be reserved.\nThe switch functions\
+            \ as a Layer 1 device, and the reservation system is not intended to reserve\
+            \ it \nbut merely to recognize it as an intermediate device."
           type: string
           x-field-uid: 9
           x-enum:
@@ -155,9 +157,12 @@ components:
               x-field-uid: 1
             ATE:
               x-field-uid: 2
+            SWITCH:
+              x-field-uid: 3
           enum:
           - DUT
           - ATE
+          - SWITCH
     Port:
       description: |-
         Local Port for Testbed Reservation Service.
