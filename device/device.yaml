@@ -51,10 +51,10 @@ components:
           x-field-uid: 8
         role:
           description: |-
-            Role of a device, ATE(Automatic test equipment), DUT(Device under Test) or SWITCH.
+            Role of a device, ATE(Automatic test equipment), DUT(Device under Test) or L1S(Layer1 Switch).
             The reservation system implementing the testbed model is supposed to
             fully reserve any equipment marked as DUT.For ATE, only the ports are intended to be reserved.
-            The switch functions as a Layer 1 device, and the reservation system is not intended to reserve it 
+            The L1S functions as a Layer 1 device, and the reservation system is not intended to reserve it 
             but merely to recognize it as an intermediate device.
           type: string
           x-field-uid: 9
@@ -63,7 +63,7 @@ components:
               x-field-uid: 1
             ATE:
               x-field-uid: 2
-            SWITCH:
+            L1S:
               x-field-uid: 3
 
 
