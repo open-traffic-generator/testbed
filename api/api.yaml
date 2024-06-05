@@ -36,7 +36,7 @@ paths:
               schema:
                 type: string
                 description: >-
-                    unique id generated during reservation.
+                  unique id generated during reservation.
       responses:
         '200':
           $ref: '../result/request.yaml#/components/responses/Success'
