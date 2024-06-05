@@ -32,7 +32,27 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Yield.Response'
+          x-field-uid: 1
+        default:
+          $ref: '#/components/responses/Failure'
+          x-field-uid: 2
+  /release:
+    post:
+      tags:
+      - Release
+      operationId: release
+      description: |-
+        Releases the devices based on unique id generated during reservation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
           x-field-uid: 1
         default:
           $ref: '#/components/responses/Failure'
@@ -409,6 +429,19 @@ components:
           type: string
           x-constraint:
           - /components/schemas/port/properties/id
+          x-field-uid: 2
+    Yield.Response:
+      description: |-
+        Output Response
+      type: object
+      properties:
+        sessionid:
+          description: |-
+            Unique ID generated during reservation
+          type: string
+          x-field-uid: 1
+        testbed:
+          type: string
           x-field-uid: 2
     Error:
       description: |-
