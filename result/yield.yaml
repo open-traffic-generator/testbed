@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Yield.Response:
+      description: >-
+        Output Response
+      type: object
+      properties: 
+        sessionid:
+          description: >-
+            Unique ID generated during reservation
+          type: string
+          x-field-uid: 1
+        testbed:
+          type: string
+          x-field-uid: 2
