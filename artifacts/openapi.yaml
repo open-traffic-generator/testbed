@@ -40,7 +40,7 @@ paths:
   /release:
     post:
       tags:
-      - Release
+      - Testbed
       operationId: release
       description: |-
         Releases the devices based on unique id generated during reservation.
