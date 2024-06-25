@@ -7,7 +7,7 @@ components:
       properties: 
         sessionid:
           description: >-
-            Unique ID generated during reservation
+            Unique session id generated during reservation
           type: string
           x-field-uid: 1
         testbed:

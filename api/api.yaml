@@ -34,9 +34,13 @@ paths:
         content:
           application/json:
               schema:
-                type: string
-                description: >-
-                  unique id generated during reservation.
+                type: object
+                properties: 
+                  sessionid:
+                    description: >-
+                      unique session id generated during reservation.
+                    x-field-uid: 1
+                    type: string
       responses:
         '200':
           $ref: '../result/request.yaml#/components/responses/Success'
