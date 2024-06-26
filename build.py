@@ -26,4 +26,4 @@ openapiart.OpenApiArt(
     protobuf_name="opentestbed",
     artifact_dir="artifacts",
     generate_version_api=True,
-).GeneratePythonSdk(package_name="opentestbed").GenerateGoSdk(package_dir="github.com/open-traffic-generator/testbed/goopentestbed", package_name="goopentestbed")
+).GeneratePythonSdk(package_name="opentestbed")
