@@ -49,13 +49,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                sessionid:
-                  description: |-
-                    unique session id generated during reservation.
-                  x-field-uid: 1
-                  type: string
+              $ref: '#/components/schemas/Session'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -500,6 +494,16 @@ components:
           items:
             type: string
           x-field-uid: 1
+    Session:
+      description: |-
+        A container for Session.
+      type: object
+      properties:
+        id:
+          description: |-
+            unique session id generated during reservation.
+          x-field-uid: 1
+          type: string
     Version:
       description: |-
         Version details
