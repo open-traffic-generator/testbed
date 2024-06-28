@@ -1,0 +1,13 @@
+components:
+  schemas:
+    Session:
+      description: |-
+        A container for Session.
+      type: object
+      properties: 
+        id:
+          description: >-
+            unique session id generated during reservation.
+          x-field-uid: 1
+          type: string
+          
