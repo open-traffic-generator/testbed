@@ -32,7 +32,27 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Yield.Response'
+          x-field-uid: 1
+        default:
+          $ref: '#/components/responses/Failure'
+          x-field-uid: 2
+  /release:
+    post:
+      tags:
+      - Testbed
+      operationId: release
+      description: |-
+        Releases the devices based on unique id generated during reservation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
           x-field-uid: 1
         default:
           $ref: '#/components/responses/Failure'
@@ -410,6 +430,19 @@ components:
           x-constraint:
           - /components/schemas/port/properties/id
           x-field-uid: 2
+    Yield.Response:
+      description: |-
+        Output Response
+      type: object
+      properties:
+        sessionid:
+          description: |-
+            Unique session id generated during reservation
+          type: string
+          x-field-uid: 1
+        testbed:
+          type: string
+          x-field-uid: 2
     Error:
       description: |-
         Error response generated while serving API request.
@@ -461,6 +494,16 @@ components:
           items:
             type: string
           x-field-uid: 1
+    Session:
+      description: |-
+        A container for Session.
+      type: object
+      properties:
+        id:
+          description: |-
+            unique session id generated during reservation.
+          x-field-uid: 1
+          type: string
     Version:
       description: |-
         Version details
