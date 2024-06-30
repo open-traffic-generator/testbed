@@ -3,7 +3,7 @@ info:
   title: Open Traffic Generator Testbed Model API
   description: |-
     OTG Testbed Model
-  version: 0.0.4
+  version: 0.0.5
   contact:
     url: https://github.com/open-traffic-generator/testbed
   license:
